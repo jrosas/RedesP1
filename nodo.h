@@ -25,18 +25,12 @@ typedef struct nodo {
     int tam;
 } Nodo;
 
-typedef struct caja {
-    char dominio[FILENAME_MAX];
-    struct caja *next;
-    struct caja *prev;
-} Caja;
-
 /*
  *Funcion newNodo()
  *Funcion que crea un nuevo nodo
  */
 Nodo* newNodo();
-Caja* newCaja(char *dominio);
+
 /*
  * Funcion setNombre()
  * Entrada

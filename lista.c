@@ -9,7 +9,7 @@
 } List;
 
  */
-
+//Lista de Nodos
 List* newList() {
     List *l = (List*) calloc(1, sizeof (List));
     l->prim = NULL;
@@ -17,7 +17,7 @@ List* newList() {
     l->total = 0;
     return l;
 }
-
+//Lista de cajas
 Lista* newLista() {
     Lista *l = (Lista*) calloc(1, sizeof (Lista));
     l->prim = NULL;
@@ -25,6 +25,18 @@ Lista* newLista() {
     l->total = 0;
     return l;
 }
+
+Caja* newCaja(char *dominio) {
+    Caja* n = (Caja*) calloc(1,sizeof (Caja));
+    n->l = newList();
+    strcpy(n->dominio, dominio); 
+    //printf ("caja creada con %s\n",n->dominio );
+    n->next = NULL;
+    n->prev = NULL;
+    
+    
+}
+
 
 void* addNodo(List* l, Nodo* n) {
     if (l->total == 0) {
@@ -95,17 +107,7 @@ void freeLista(Lista* l) {
     l->prim = NULL;
 }
 
-/*
-void llenarLista(){
-  int pr;   
-  char *hostaddress;
-  char *path;
-   pr = fscanf(argv[1], "http://%99[^/]%s", hostaddress, path); 
 
-   
-}
-
- */
 void* showLista(Lista *l) {
 
     Caja *aux = l->prim;
@@ -118,14 +120,12 @@ void* showLista(Lista *l) {
 }
 
 int main(int argc, char **argv) {
-
-    List *lista = newList();
-    Nodo *primero = newNodo();
-    Nodo *segundo = newNodo();
-    Nodo *tercero = newNodo();
+   // printf ("holaaaa!!! \n");
     FILE *fp;
     char result[FILENAME_MAX];
-    char *aux;
+    char *hola;
+    hola="HOLAAAAAA";
+    //char *aux;
  //   char otra[100];
 /*
     setNombre(primero, "1");
@@ -153,6 +153,8 @@ int main(int argc, char **argv) {
     }
 */
     //freeList(lista);
+    
+    
     Lista *lista2 = newLista();
 
     if ((fp = fopen(argv[1], "r")) == NULL) {
@@ -161,14 +163,12 @@ int main(int argc, char **argv) {
     }
     while (fscanf(fp," http:// %s\n", result) !=  EOF) {
         printf ("%s\n",result);
-      
-
-        
-        
         addCaja(lista2, newCaja(result));
+        
      //   free (aux);
                
     }
+    
    showLista(lista2);
     fclose(fp);
     return (EXIT_SUCCESS);
