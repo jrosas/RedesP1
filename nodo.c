@@ -1,35 +1,37 @@
 #include "nodo.h"
 
-/*
- Funcion newNodo()
- Funcion que crea un nuevo nodo
+/**
+ * Constructor de la struc Nodo
+ * @param nombre nombre del archivo
+ * @return apuntador al Nodo creado
  */
 Nodo* newNodo(char *nombre) {
     Nodo* n = (Nodo*) calloc(1, sizeof (Nodo));
     n->next = NULL;
     n->prev = NULL;
-    strcpy (n->nombre,nombre);
+    strcpy(n->nombre, nombre);
     n->fecha = (struct tm*) calloc(1, sizeof (struct tm));
     n->tam = 0;
+    return n;
 }
 
-
-/*
- * Funcion setNombre()
- * Entrada
- * Salida
+/**
+ * Funcion que escribe el nombre del archivo en nodo n
+ * @param n apuntador al nodo
+ * @param nombre nombre nuevo
+ * @return void*
  */
 
-void* setNombre(Nodo* n, char *nombre) {
-    strcpy (n->nombre,nombre);
-    //printf("%s\n", n->nombre);
 
+void* setNombre(Nodo* n, char *nombre) {
+    strcpy(n->nombre, nombre);
 }
 
-/*
- * Funcion setF
- * Entrada
- * Salida struct 
+/**
+ * Funcion que escribe una nueva fecha en el nodo n
+ * @param n apuntador al nodo
+ * @param fecha fecha nueva bajo la estructura tm
+ * @return void*
  */
 
 void* setF(Nodo* n, struct tm* fecha) {
@@ -37,34 +39,43 @@ void* setF(Nodo* n, struct tm* fecha) {
 
 }
 
-/*
- * Funcion setN
- * Entrada
- * Salida
+/**
+ * Funcion que coloca el siguiente en el nodo n
+ * @param n apuntador al nodo
+ * @param next apuntador al siguiente nodo
+ * @return void*
  */
-
 void* setN(Nodo* n, Nodo *next) {
     n->next = next;
 }
 
-/*
- * Funcion setP
- * Entrada
- * Salida
+/**
+ * Funcion que coloca el nodo anterior al nodo n
+ * @param n Apuntador al nodo
+ * @param prev apuntador al nodo previo
+ * @return void*
  */
 void* setP(Nodo* n, Nodo *prev) {
     n->prev = prev;
 }
 
+/**
+ * Funcion que escribe el tamaño del archivo
+ * @param n Apuntador al nodo
+ * @param t tamaño nuevo del archivo
+ * @return void*
+ */
 void* setT(Nodo* n, int t) {
     n->tam = t;
 }
 
-/*
- * devuelve 0 en caso de ser iguales 
- * devuelve 1 en caso de ser distintos. 
- * 
- *  
+/**
+ * Funcion que compara dos nodos
+ * @param n Apuntador al primero a comparar
+ * @param p Apuntador al segundo a comparar
+ * @return Devuelve 0 en caso de ser iguales
+ *         1 en caso de que el nodo n es mas actual
+ *         2 en caso de que el nodo p es mas actual
  */
 int compare(Nodo* n, Nodo *p) {
     double comp = compareF(n, p);
@@ -80,6 +91,12 @@ int compare(Nodo* n, Nodo *p) {
 
 }
 
+/**
+ * Funcion que compara las fechas de dos nodos
+ * @param n Primer nodo a comparar
+ * @param p Segundo nodo a comparar
+ * @return  Devuelve un double de la resta de las fechas
+ */
 double compareF(Nodo* n, Nodo* p) {
     double salida;
     time_t t1;
@@ -87,10 +104,16 @@ double compareF(Nodo* n, Nodo* p) {
     t1 = mktime(n->fecha);
     t2 = mktime(p->fecha);
     salida = difftime(t1, t2);
-    // printf("%f\n", salida);
     return (salida);
 }
 
+/**
+ * Funcion que compara los nombres de dos nodos
+ * @param n Primer nodo a comparar
+ * @param p Segundo nodo a comparar
+ * @return Devuelve 0 si son iguales
+ *                  otro si sin distintos
+ */
 int compareN(Nodo* n, Nodo *p) {
     int salida;
     salida = strcmp(n->nombre, p->nombre);
@@ -161,4 +184,4 @@ int main(int argc, char **argv) {
 
 }
 
-**/
+ **/

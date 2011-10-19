@@ -1,15 +1,12 @@
 #include "lista.h"
 #include "nodo.h"
 
-/*
- typedef struct list {
-        Nodo *prim;
-        Nodo *ult;
-        int total;
-} List;
-
+/**
+ * Constructor de la Lista de Nodos
+ * @return Apuntador a la nueva lista creada
  */
-//Lista de Nodos
+
+
 List* newList() {
     List *l = (List*) calloc(1, sizeof (List));
     l->prim = NULL;
@@ -17,7 +14,11 @@ List* newList() {
     l->total = 0;
     return l;
 }
-//Lista de cajas
+
+/**
+ * Constructor de la Lista de Cajas
+ * @return Apuntador a la nueva lista creada
+ */
 Lista* newLista() {
     Lista *l = (Lista*) calloc(1, sizeof (Lista));
     l->prim = NULL;
@@ -26,17 +27,29 @@ Lista* newLista() {
     return l;
 }
 
+/**
+ * Constructor de la estructura Caja
+ * @param dominio char* que contiene el nombre del dominio
+ * @return Apuntador a la nueva Caja creada
+ */
+
 Caja* newCaja(char *dominio) {
-    Caja* n = (Caja*) calloc(1,sizeof (Caja));
+    Caja* n = (Caja*) calloc(1, sizeof (Caja));
     n->l = newList();
-    strcpy(n->dominio, dominio); 
-    //printf ("caja creada con %s\n",n->dominio );
+    strcpy(n->dominio, dominio);
     n->next = NULL;
     n->prev = NULL;
-    
-    
+    return n;
+
+
 }
 
+/**
+ * Funcion que añade un Nodo a la struct List
+ * @param l Apuntador a la List
+ * @param n Apuntador al Nodo a agregar
+ * @return void*
+ */
 
 void* addNodo(List* l, Nodo* n) {
     if (l->total == 0) {
@@ -51,6 +64,12 @@ void* addNodo(List* l, Nodo* n) {
     }
 }
 
+/**
+ * Funcion que añade un Nodo a la struct Lista
+ * @param l Apuntador a la Lista
+ * @param c Apuntador a la Caja
+ * @return  void*
+ */
 void* addCaja(Lista* l, Caja* c) {
     if (l->total == 0) {
         l->prim = c;
@@ -64,10 +83,12 @@ void* addCaja(Lista* l, Caja* c) {
     }
 }
 
-/*
-Si esta devuelve 1
+/**
+ * Funcion que busca en una List un nombre de archivo.
+ * @param l Apuntador a la struct List
+ * @param nombre char* que contiene el nombre a buscar
+ * @return Devuelve 1 si es encontrado. 0 si no.
  */
-
 int isInL(List *l, char *nombre) {
     Nodo *aux = l->prim;
     Nodo *nodo = newNodo();
@@ -81,6 +102,10 @@ int isInL(List *l, char *nombre) {
     return 0;
 }
 
+/**
+ * Funcion que libera la struct List
+ * @param l Apuntador a List
+ */
 void freeList(List* l) {
     l->total = 0;
     Nodo* nodo = l->ult;
@@ -94,6 +119,10 @@ void freeList(List* l) {
     l->prim = NULL;
 }
 
+/**
+ * Funcion que libera la struc Lista
+ * @param l Apuntador a Lista
+ */
 void freeLista(Lista* l) {
     l->total = 0;
     Caja* caja = l->ult;
@@ -107,6 +136,11 @@ void freeLista(Lista* l) {
     l->prim = NULL;
 }
 
+/**
+ * Funcion usada para depurar el correcto funcionamiento de la lista
+ * @param l Apuntador a la Lista
+ * @return void*
+ */
 
 void* showLista(Lista *l) {
 
@@ -120,56 +154,56 @@ void* showLista(Lista *l) {
 }
 
 int main(int argc, char **argv) {
-   // printf ("holaaaa!!! \n");
+    // printf ("holaaaa!!! \n");
     FILE *fp;
     char result[FILENAME_MAX];
     char *hola;
-    hola="HOLAAAAAA";
+    hola = "HOLAAAAAA";
     //char *aux;
- //   char otra[100];
-/*
-    setNombre(primero, "1");
-    setNombre(segundo,           "2");
-    setNombre(tercero, "3");
+    //   char otra[100];
+    /*
+        setNombre(primero, "1");
+        setNombre(segundo,           "2");
+        setNombre(tercero, "3");
 
-    addNodo(lista, primero);
-    addNodo(lista, segundo);
-    addNodo(lista, tercero);
+        addNodo(lista, primero);
+        addNodo(lista, segundo);
+        addNodo(lista, tercero);
 
-    if (isInL(lista, "1") == 1) {
-        printf("El elemento 1 esta en la lista\n");
-    }
-    if (isInL(lista, "2") == 1) {
-        printf("El elemento 2 esta en la lista\n");
-    }
+        if (isInL(lista, "1") == 1) {
+            printf("El elemento 1 esta en la lista\n");
+        }
+        if (isInL(lista, "2") == 1) {
+            printf("El elemento 2 esta en la lista\n");
+        }
 
-    if (isInL(lista, "3") == 1) {
-        printf("El elemento 3 esta en la lista\n");
-    }
-    if (isInL(lista, "4") == 1) {
-        printf("El elemento 3 esta en la lista\n");
-    } else {
-        printf("El elemento 4 no esta en la lista\n");
-    }
-*/
+        if (isInL(lista, "3") == 1) {
+            printf("El elemento 3 esta en la lista\n");
+        }
+        if (isInL(lista, "4") == 1) {
+            printf("El elemento 3 esta en la lista\n");
+        } else {
+            printf("El elemento 4 no esta en la lista\n");
+        }
+     */
     //freeList(lista);
-    
-    
+
+
     Lista *lista2 = newLista();
 
     if ((fp = fopen(argv[1], "r")) == NULL) {
         printf("Error al abrir archivo");
         return 1;
     }
-    while (fscanf(fp," http:// %s\n", result) !=  EOF) {
-        printf ("%s\n",result);
+    while (fscanf(fp, " http:// %s\n", result) != EOF) {
+        printf("%s\n", result);
         addCaja(lista2, newCaja(result));
-        
-     //   free (aux);
-               
+
+        //   free (aux);
+
     }
-    
-   showLista(lista2);
+
+    showLista(lista2);
     fclose(fp);
     return (EXIT_SUCCESS);
 
