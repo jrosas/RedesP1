@@ -15,6 +15,14 @@ int main(int argc,char *argv[]){
   int seg_esp=30;
   char *dir_trabajo=NULL;
   char *archivo_trabajo=NULL;
+  
+  if (argc<2){
+    printf(
+	   "uso: %s [-t <num_segundos>][-d <directorio>][-a <archivo.txt>]\n",
+	   nombre_prog
+	   );
+    exit(1);
+  }
 
   while (i<argc){
 

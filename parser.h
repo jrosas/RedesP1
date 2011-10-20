@@ -8,8 +8,8 @@
 
 #ifndef PARSER  
 #define PARSER
-Nodo* lineaparser(regex_t regex,char*linea);
-regex_t inicparser();
+void* inicparser(regex_t *regex);
+Nodo* lineaparser(char*linea,regex_t *regex);
+//Nodo* lineaparser(char*linea,regex_t regex);
+//regex_t inicparser(regex_t regex);
 #endif
-
-

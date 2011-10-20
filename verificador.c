@@ -71,19 +71,21 @@ FILE *hacerrequest(int sockfd,char *url){
   }
   printf("GET %s HTTP/1.0 \r\n\r\n",url);
   fprintf(fd,"GET %s HTTP/1.0 \r\n\r\n",url);
-  /* char *encabezado="GET "; */
-  /* char *cuerpo=" HTTP/1.0\r\nhost:"; */
-  /* char *pie=" \r\n\r\n"; */
+ 
   return fd;
 
 }
 
 void *leerlinea(FILE *fd){
   char linea[2048];
-  //regex_t regex;
-  //inicparser(regex,)
+  regex_t *regex=malloc(sizeof(regex_t));
+  //regmatch_t machout[4];
+  
+  printf("aca2\n");
+  inicparser(regex);
   while (fgets(linea,1024,fd)!=NULL){
     printf("%s",linea);
+    lineaparser(linea,regex);
   }
 }
 //08-10729
