@@ -169,6 +169,7 @@ void* showLista(Lista *l) {
         aux = aux->next;
     }
 }
+/*
 
 int main(int argc, char **argv) {
     // printf ("holaaaa!!! \n");
@@ -242,7 +243,7 @@ int main(int argc, char **argv) {
         } else {
             printf("El elemento 4 no esta en la lista\n");
         }
-     */
+     
     //freeList(lista);
 
 
@@ -288,6 +289,7 @@ int main(int argc, char **argv) {
         }
 
     }
+*/
 
 
 
