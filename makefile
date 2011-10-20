@@ -1,15 +1,12 @@
 CC = gcc
 RM = rm
+OBJS = $(patsubst %.c, %.o, $(wildcard *.c))
 
-ejecutables: lista.o nodo.o 
-	$(CC) -o lista lista.o nodo.o
-
-
-procesos.o: lista.c
-	$(CC) -c lista.c lista.h
-
-lector.o: nodo.c nodo.h
-	$(CC) -c nodo.c
-
+main: $(OBJS)
+	$(CC) -o verific $(OBJS) -lpthread
+    
+%.o: %.c
+	$(CC) -c  $<
+    
 clean:
-	$(RM) *.o   lista
+	$(RM) *.o verific
