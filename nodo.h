@@ -9,7 +9,7 @@
 typedef struct nodo {
     struct nodo *next;
     struct nodo *prev;
-    char *nombre;
+    char nombre[FILENAME_MAX];
     struct tm *fecha;
     int tam;
 } Nodo;

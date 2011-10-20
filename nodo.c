@@ -9,7 +9,9 @@ Nodo* newNodo(char *nombre) {
     Nodo* n = (Nodo*) calloc(1, sizeof (Nodo));
     n->next = NULL;
     n->prev = NULL;
+  
     strcpy(n->nombre, nombre);
+      //printf("hola\n");
     n->fecha = (struct tm*) calloc(1, sizeof (struct tm));
     n->tam = 0;
     return n;
@@ -121,15 +123,19 @@ int compareN(Nodo* n, Nodo *p) {
 }
 /*
 int main(int argc, char **argv) {
-    Nodo* tmp = newNodo();
-    Nodo* tmp2 = newNodo();
+    
     struct tm ts2;
     struct tm ts4;
     struct tm *ts3;
     char *hora;
     char *hora2;
-    char *nombre;
-    nombre = "tmp2";
+    char nombre[FILENAME_MAX];
+   // printf("133\n");
+   // sprintf(nombre,"tmp2");
+    //printf("135\n");
+    Nodo* tmp = newNodo(nombre);
+    Nodo* tmp2 = newNodo("hola2");
+    
     double compare2;
     int nombress;
 
@@ -184,4 +190,4 @@ int main(int argc, char **argv) {
 
 }
 
- **/
+*/
