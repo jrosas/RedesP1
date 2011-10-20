@@ -1,73 +1,48 @@
-#include <sys/types.h>
-#include <regex.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <strings.h>
+#include "parser.h"
 
-int main(int argc, char *argv[]){
-        regex_t regex;
-        int reti;
-        char msgbuf[100];
-	regmatch_t machout[4];
-	char *test="gggg<a href=\"examenI.pdf\">examenI.pdf</a>                   18-Jul-2006 11:57   95K ggggggggg<a href=\"examenI.pdf\">examenI.pdf</a>                   18-Jul-2006 11:57   95K ggggg ";
-/* Compile regular expression */
+regex_t regex;
+regmatch_t machout[4];
+int reti;
+char msgbuf[100];
 
-	reti = regcomp(&regex,"<a[ \t]href=\"[^\"]+\">\([^<>]+)</a>[ \t]+\([0-3]?[0-9]-[A-Z][a-z]{2}-[0-9]{4}[ \t]+[0-2][0-9]:[0-5][0-9])[ \t]+\(-?|[0-9]*)",REG_EXTENDED)
-;
-        if( reti ){ fprintf(stderr, "Could not compile regex\n"); exit(1); }
+char *expr="<a[ \t]+href=\"[^\"]+\">\([^<>]+)</a>[ \t]+\([0-3]?[0-9]-[A-Z][a-z]{2}-[0-9]{4}[ \t]+[0-2][0-9]:[0-5][0-9])[ \t]+\(-?|[0-9]*)";
 
-/* Execute regular expression */
-        reti = regexec(&regex,test, 4,machout, 0);
-        if( !reti ){
-                puts("Match");
-        }
-        else if( reti == REG_NOMATCH ){
-                puts("No match");
-        }
-        else{
-                regerror(reti, &regex, msgbuf, sizeof(msgbuf));
-                fprintf(stderr, "Regex match failed: %s\n", msgbuf);
-                exit(1);
-        
-	}printf("\n%s\n","sasd");
-	char to[100];
-	//to=strndup(test+26,41);
-	//strncpy(to,test+26,37);
-	printf("start=%d end=%d\n",machout[0].rm_so,machout[0].rm_eo);
-	printf("start=%d end=%d\n",machout[1].rm_so,machout[1].rm_eo);
-	printf("start=%d end=%d\n",machout[2].rm_so,machout[2].rm_eo);
-	printf("start=%d end=%d\n",machout[3].rm_so,machout[3].rm_eo);
-	printf("%s\n",test+4);
-	printf("%s\n",test+26);
-	printf("%s\n",test+60);
-	printf("%s\n",test+80);
-/* Free compiled regular expression if you want to use the regex_t again */
+regex_t inicparser(){
 
-	reti = regexec(&regex,test+82, 4,machout, 0);
-        if( !reti ){
-                puts("Match");
-        }
-        else if( reti == REG_NOMATCH ){
-                puts("No match");
-        }
-        else{
-                regerror(reti, &regex, msgbuf, sizeof(msgbuf));
-                fprintf(stderr, "Regex match failed: %s\n", msgbuf);
-                exit(1);
-        
-	}
-printf("\n%s\n","sasd");
-	regfree(&regex);
+  reti = regcomp(&regex,expr,REG_EXTENDED);
+  if( reti ){
+    perror("no se pudo compilar la expresión regular");
+    exit(1);
+  }
 
-	//        return 0;
-
-	printf("start=%d end=%d\n",machout[0].rm_so,machout[0].rm_eo);
-	printf("start=%d end=%d\n",machout[1].rm_so,machout[1].rm_eo);
-	printf("start=%d end=%d\n",machout[2].rm_so,machout[2].rm_eo);
-	printf("start=%d end=%d\n",machout[3].rm_so,machout[3].rm_eo);
-	printf("%s\n",test+82+11);
-	printf("%s\n",test+82+33);
-	printf("%s\n",test+82+67);
-	printf("%s\n",test+82+87); 
+  // return regex;
 }
-// /r/n/r/n
+
+
+Nodo* lineaparser(regex_t regex,char*linea){
+
+  /* Ejecutar la expresion regular */
+  reti = regexec(&regex,linea, 4,machout, 0);
+  Nodo* nodo=NULL;
+  
+  if( !reti ){
+  
+    nodo=newNodo("hola");
+    //puts("Match");
+  
+    printf("start=%d end=%d\n",machout[0].rm_so,machout[0].rm_eo);
+    printf("start=%d end=%d\n",machout[1].rm_so,machout[1].rm_eo);
+    printf("start=%d end=%d\n",machout[2].rm_so,machout[2].rm_eo);
+    printf("start=%d end=%d\n",machout[3].rm_so,machout[3].rm_eo);
+  }
+  else if( reti == REG_NOMATCH ){
+    puts("No match");
+  }
+  else{
+    regerror(reti, &regex, msgbuf, sizeof(msgbuf));
+    fprintf(stderr, "Regex match failed: %s\n", msgbuf);
+    exit(1);
+  }
+
+  return nodo;
+}
