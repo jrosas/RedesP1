@@ -1,5 +1,9 @@
 #include "lista.h"
 #include "nodo.h"
+#include <unistd.h>
+#include <sys/uio.h>
+#include <errno.h>
+//#include <strings.h>
 
 /**
  * Constructor de la Lista de Nodos
@@ -91,8 +95,8 @@ void* addCaja(Lista* l, Caja* c) {
  */
 int isInL(List *l, char *nombre) {
     Nodo *aux = l->prim;
-    Nodo *nodo = newNodo();
-    setNombre(nodo, nombre);
+    Nodo *nodo = newNodo(nombre);
+    //setNombre(nodo, nombre);
     while (aux != NULL) {
         if (compareN(aux, nodo) == 0) {
             return 1;
@@ -102,10 +106,6 @@ int isInL(List *l, char *nombre) {
     return 0;
 }
 
-/**
- * Funcion que libera la struct List
- * @param l Apuntador a List
- */
 void freeList(List* l) {
     l->total = 0;
     Nodo* nodo = l->ult;
@@ -155,6 +155,46 @@ void* showLista(Lista *l) {
 
 int main(int argc, char **argv) {
     // printf ("holaaaa!!! \n");
+
+
+
+    // int socketfd;
+    // int addrinfoerror;
+    // int i;
+    ///int timer = 30;
+    //    int caseurl = 0;
+    //   int casefile = 0;
+    //  int comillaenable = 0;
+    // int comillaenable2 = 0;
+    // int dateenable = 0;
+    //int timeenable = 0;
+    //int j = 0;
+    //int counter = 6;
+    //int filecounter = -1;
+    //char buffer[1024];
+    //struct addrinfo *serverlist;
+    /// struct addrinfo *serverlistptr;
+    //struct addrinfo hints;
+    //  char* serveraddress;
+    // char* serveruri;
+    //char* filename;
+    //char* request;
+    //char* token;
+    //char* token1;
+    //char line[500];
+    // char line3[500];
+    //char parser[100];
+    //char filename2[100];
+    //char filename3[100];
+    //char filename0[100];
+    //char date[100];
+    //char time[100];
+    //FILE* fileptr;
+    //lista_URL* head;
+
+
+
+
     FILE *fp;
     char result[FILENAME_MAX];
     char *hola;
@@ -202,6 +242,55 @@ int main(int argc, char **argv) {
         //   free (aux);
 
     }
+
+
+    //  int keypressed;
+    char key;
+    //char *akey = key;
+    //int  timeremaining;
+    while (1) {
+        key = getchar();
+        //printf("%c",key);
+        // s == 115 & S == 83
+        if (key == 115 || key == 83) {
+
+            printf("Se cancelo la ejecucion del programa\n");
+            break;
+
+        }
+        // c == 99 & C = 67
+        if (key == 99 || key == 67) {
+
+            printf("Continua la ejecucion del programa\n");
+
+        }
+
+        // p == 112 & P == 80
+        if (key == 112 || key == 80) {
+            printf("Se ha pausado el programa\n");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     showLista(lista2);
     fclose(fp);
