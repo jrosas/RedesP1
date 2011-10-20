@@ -106,6 +106,23 @@ int isInL(List *l, char *nombre) {
     return 0;
 }
 
+Caja* buscaCaja(Lista *l,char *dominio){
+    Caja *aux = l->prim;
+    char dom[FILENAME_MAX];
+    strcpy (dom,dominio);
+    while (aux != NULL ){
+        if (strcmp (aux->dominio, dom)==0){
+            return aux;
+        }
+        aux =aux->next;
+    }
+    return NULL;
+            
+    
+}
+
+
+
 void freeList(List* l) {
     l->total = 0;
     Nodo* nodo = l->ult;
