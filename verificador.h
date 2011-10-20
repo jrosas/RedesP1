@@ -7,11 +7,10 @@
 #include <netdb.h> 
 #include "lista.h"
 #include "parser.h"
-//#include <string.h>
-//#include <fcntl.h>
 
-//#ifndef VERIFICADOR
 
+#ifndef VERIFICADOR
+#define VERIFICADOR
 
 #define PORT 80
 char* obtener_host(char* directorio);
@@ -20,4 +19,4 @@ FILE* hacerrequest(int sockfd,char *url);
 void *leerlinea(FILE *fd);
 
 
-//#endif
+#endif
