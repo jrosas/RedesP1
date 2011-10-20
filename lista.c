@@ -106,6 +106,23 @@ int isInL(List *l, char *nombre) {
     return 0;
 }
 
+Caja* buscaCaja(Lista *l,char *dominio){
+    Caja *aux = l->prim;
+    char dom[FILENAME_MAX];
+    strcpy (dom,dominio);
+    while (aux != NULL ){
+        if (strcmp (aux->dominio, dom)==0){
+            return aux;
+        }
+        aux =aux->next;
+    }
+    return NULL;
+            
+    
+}
+
+
+
 void freeList(List* l) {
     l->total = 0;
     Nodo* nodo = l->ult;
@@ -152,6 +169,7 @@ void* showLista(Lista *l) {
         aux = aux->next;
     }
 }
+/*
 
 int main(int argc, char **argv) {
     // printf ("holaaaa!!! \n");
@@ -225,7 +243,7 @@ int main(int argc, char **argv) {
         } else {
             printf("El elemento 4 no esta en la lista\n");
         }
-     */
+     
     //freeList(lista);
 
 
@@ -271,6 +289,7 @@ int main(int argc, char **argv) {
         }
 
     }
+*/
 
 
 
