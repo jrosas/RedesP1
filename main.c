@@ -65,69 +65,54 @@ int main(int argc, char *argv[]) {
 
         i++;
     }
-    /*
-    printf("%s\n",nombre_prog);
-    printf("%i\n",seg_esp);
-    printf("%s\n",dir_trabajo);
-    printf("%s\n",archivo_trabajo);
-     */
+
     if (dir_trabajo != NULL) {
-        // char *host=(char*)malloc(sizeof(char)*2048);
         char *host;
         Lista *ld = newLista();
         List *l = newList();
         int sockfd;
         FILE *fd;
-        //List *l;
         addCaja(ld, newCaja(dir_trabajo));
         char key;
-        //char * path;
-        int i =1 ;
         while (1) {
             host = obtener_host(dir_trabajo);
             printf("Hacer el request: %s\n", dir_trabajo);
-            //strtok(dir_trabajo, "/");
-            //host=(char*)strtok(NULL, "/");
-            printf("Hacer el request: %s\n", host);
             sockfd = conneccion(host);
             fd = hacerrequest(sockfd, dir_trabajo);
 
             l = leerlinea(fd, l);
             setList(ld->prim, l);
             //
-            fscanf(stdin,"%c",&key);
+            if (stdin != NULL) {
+                fscanf(stdin, "%c", &key);
 
-            // s == 115 & S == 83
-            if (key == 115 || key == 83) {
+                // s == 115 & S == 83
+                if (key == 115 || key == 83) {
 
-                printf("Se cancelo la ejecucion del programa\n");
-                break;
+                    printf("Se cancelo la ejecucion del programa\n");
+                    break;
 
-            }
-            // c == 99 & C = 67
+                }
 
+                // p == 112 & P == 80
+                if (key == 112 || key == 80) {
+                    printf("Se ha pausado el programa\n");
+                    while (1) {
+                        key = getchar();
+                        // c == 99 & C = 67
+                        if (key == 99 || key == 67) {
 
-            // p == 112 & P == 80
-            if (key == 112 || key == 80) {
-                printf("Se ha pausado el programa\n");
-                while (1) {
-                    key = getchar();
-                    if (key == 99 || key == 67) {
-
-                        printf("Continua la ejecucion del programa\n");
-                        break;
+                            printf("Continua la ejecucion del programa\n");
+                            break;
+                        }
                     }
                 }
             }
             //
-            sleep(1);
-            printf("Nuevo ciclo!!! %i  \n \n", i);
-            i++;
+            sleep(seg_esp);
         }
 
-        //segunda vez.
 
-        //0424 192 46 76
     } else if (dir_trabajo == NULL && archivo_trabajo != NULL) {
         FILE *fp;
         char result[FILENAME_MAX];
@@ -146,8 +131,8 @@ int main(int argc, char *argv[]) {
         int sockfd;
         char *host;
         int paso = 0;
-        int i = 1;
         List *l;
+        char key;
         while (1) {
             printf("%s\n", "inicio bucle infinito");
             if (paso == 0) {
@@ -175,36 +160,35 @@ int main(int argc, char *argv[]) {
                     aux = aux->next;
                 }
             }
+
             aux = lista->prim;
+            if (stdin != NULL) {
+                fscanf(stdin, "%c", &key);
+
+                // s == 115 & S == 83
+                if (key == 115 || key == 83) {
+
+                    printf("Se cancelo la ejecucion del programa\n");
+                    break;
+
+                }
+
+                // p == 112 & P == 80
+                if (key == 112 || key == 80) {
+                    printf("Se ha pausado el programa\n");
+                    while (1) {
+                        key = getchar();
+                        // c == 99 & C = 67
+                        if (key == 99 || key == 67) {
+
+                            printf("Continua la ejecucion del programa\n");
+                            break;
+                        }
+                    }
+                }
+            }
             sleep(seg_esp);
-            printf("Nuevo ciclo!!! %i  \n \n", i);
-            i++;
         }
-        //Lista *ld = newLista();
-        //
-
-
-        //List *l;
-        //addCaja(ld, newCaja(dir_trabajo));
-        //
-
-        //while (1) {
-        //  host = obtener_host(dir_trabajo);
-        //  printf("Hacer el request: %s\n", dir_trabajo);
-        //strtok(dir_trabajo, "/");
-        //host=(char*)strtok(NULL, "/");
-        //printf("Hacer el request: %s\n", host);
-        //
-
-
-        //l = leerlinea(fd, l);
-        //setList(ld->prim, l);
-        //sleep(seg_esp);
-
-
-
-
-
 
     }
 

@@ -103,7 +103,7 @@ int compare(Nodo* n, Nodo *p) {
 int compareF(Nodo* n, Nodo* p) {
    
    int salida = (strcmp (n->fecha,p->fecha));     
-    //printf("%s vs %s\n",n->fecha,p->fecha) ;
+    //Fprintf("%s vs %s\n",n->fecha,p->fecha) ;
     //printf ("%f\n",salida);
     return (salida);
 }
@@ -120,73 +120,3 @@ int compareN(Nodo* n, Nodo *p) {
     salida = strcmp(n->nombre, p->nombre);
     return (salida);
 }
-/*
-int main(int argc, char **argv) {
-    
-    struct tm ts2;
-    struct tm ts4;
-    struct tm *ts3;
-    char *hora;
-    char *hora2;
-    char nombre[FILENAME_MAX];
-   // printf("133\n");
-   // sprintf(nombre,"tmp2");
-    //printf("135\n");
-    Nodo* tmp = newNodo(nombre);
-    Nodo* tmp2 = newNodo("hola2");
-    
-    double compare2;
-    int nombress;
-
-    hora = "1992-18-10 10:21:33";
-    strptime(hora, "%Y-%d-%m %H:%M:%S", &ts2);
-    ts3 = &ts2;
-    setNombre(tmp, "tmp1");
-    setF(tmp, ts3);
-
-    hora2 = "1995-18-10 10:21:33";
-    setNombre(tmp2, "tmp");
-    strptime(hora2, "%Y-%d-%m %H:%M:%S", &ts4);
-    ts3 = &ts4;
-    setF(tmp2, ts3);
-    setT(tmp, 100);
-    setT(tmp2, 200);
-
-    compare2 = compareF(tmp2, tmp);
-    nombress = compareN(tmp, tmp2);
-
-    if (nombress != 0) {
-        printf("Los nombres son distintos\n");
-
-    } else {
-        printf("los nombres son iguales\n");
-
-    }
-    int comparar = compare(tmp2, tmp);
-    if (comparar == 0) {
-        printf("Los archivos son iguales\n");
-    } else {
-        printf("Los archivos son distintos \n");
-        if (comparar == 1) {
-            printf("El archivo %s, es mas actual\n", tmp2->nombre);
-        }
-        if (comparar == 2) {
-            printf("El archivo %s, es el mas actual\n", tmp->nombre);
-        }
-    }
-    
-    //
-
-    setN(tmp, tmp2);
-    setP(tmp2, tmp);
-
-    //printf ("%s\n",tmp->next->nombre);
-    //printf ("%s\n",tmp2->prev->nombre);
-
-
-
-
-
-}
-
-*/

@@ -5,6 +5,10 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
+#include <termios.h>
+#include <unistd.h>
+#include <assert.h>
+#include <string.h>
 #include "lista.h"
 #include "parser.h"
 
