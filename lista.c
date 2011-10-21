@@ -39,7 +39,7 @@ Lista* newLista() {
 
 Caja* newCaja(char *dominio) {
     Caja* n = (Caja*) calloc(1, sizeof (Caja));
-    n->l = newList();
+    n->l = NULL;
     strcpy(n->dominio, dominio);
     n->next = NULL;
     n->prev = NULL;
@@ -56,16 +56,39 @@ Caja* newCaja(char *dominio) {
  */
 
 void* addNodo(List* l, Nodo* n) {
+    int tmp;
+    char *y = n->nombre;
+    Nodo *aux = isInL(l, y);
     if (l->total == 0) {
         l->prim = n;
         l->ult = n;
         (l->total)++;
+        printf("El archivo %s, es nuevo\n", n->nombre);
     } else {
-        l->ult->next = n;
-        n->prev = l->ult;
-        l->ult = n;
-        (l->total)++;
+        if (aux != NULL) {
+
+            tmp = compare(aux, n);
+
+            if (tmp == 0) {
+                printf("No se agrego el archivo\n");
+            } else if (tmp == 1) {
+                printf("El archivo %s fue modificado\n", aux->nombre);
+
+            } else if (tmp == 2) {
+                printf("El archivo %s actualizado\n", n->nombre);
+            }
+
+        } else {
+            l->ult->next = n;
+            n->prev = l->ult;
+            l->ult = n;
+            (l->total)++;
+            printf("El archivo %s, es nuevo\n", n->nombre);
+        }
+
+
     }
+
 }
 
 /**
@@ -74,16 +97,24 @@ void* addNodo(List* l, Nodo* n) {
  * @param c Apuntador a la Caja
  * @return  void*
  */
-void* addCaja(Lista* l, Caja* c) {
+void* addCaja(Lista *l, Caja *c) {
+    char *y = c->dominio;
+    Caja *aux = NULL;
+            aux = buscaCaja(l, y);
+
     if (l->total == 0) {
         l->prim = c;
         l->ult = c;
         (l->total)++;
     } else {
-        l->ult->next = c;
-        c->prev = l->ult;
-        l->ult = c;
-        (l->total)++;
+        if (aux != NULL) {
+            printf("el directorio %s, ya se encuentra registrado\n", c->dominio);
+        } else {
+            l->ult->next = c;
+            c->prev = l->ult;
+            l->ult = c;
+            (l->total)++;
+        }
     }
 }
 
@@ -93,35 +124,39 @@ void* addCaja(Lista* l, Caja* c) {
  * @param nombre char* que contiene el nombre a buscar
  * @return Devuelve 1 si es encontrado. 0 si no.
  */
-int isInL(List *l, char *nombre) {
+Nodo* isInL(List *l, char *nombre) {
     Nodo *aux = l->prim;
     Nodo *nodo = newNodo(nombre);
     //setNombre(nodo, nombre);
     while (aux != NULL) {
         if (compareN(aux, nodo) == 0) {
-            return 1;
+            return aux;
         }
         aux = aux->next;
     }
-    return 0;
+    return NULL;
 }
 
-Caja* buscaCaja(Lista *l,char *dominio){
+Caja* buscaCaja(Lista *l, char *dominio) {
     Caja *aux = l->prim;
     char dom[FILENAME_MAX];
-    strcpy (dom,dominio);
-    while (aux != NULL ){
-        if (strcmp (aux->dominio, dom)==0){
+    strcpy(dom, dominio);
+    while (aux != NULL) {
+        if (strcmp(aux->dominio, dom) == 0) {
             return aux;
         }
-        aux =aux->next;
+        aux = aux->next;
     }
     return NULL;
-            
-    
+
+
 }
 
+void *setList(Caja *c, List *l) {
+    c->l = l;
 
+
+}
 
 void freeList(List* l) {
     l->total = 0;
@@ -289,7 +324,7 @@ int main(int argc, char **argv) {
         }
 
     }
-*/
+ */
 
 
 
@@ -320,4 +355,4 @@ int main(int argc, char **argv) {
 
 }
 
-*/
+ */

@@ -68,7 +68,7 @@ void* addCaja(Lista* l, Caja* c);
  * @param nombre char* que contiene el nombre a buscar
  * @return Devuelve 1 si es encontrado. 0 si no.
  */
-int isInL(List *l, char *nombre);
+Nodo* isInL(List *l, char *nombre);
 /**
  * Funcion que libera la struct List
  * @param l Apuntador a List
@@ -86,5 +86,7 @@ void freeLista(Lista* l);
  */
 
 void* showLista(Lista *l);
+
+Caja* buscaCaja(Lista *l, char *dominio) ;
 
 #endif

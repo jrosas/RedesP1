@@ -16,7 +16,7 @@
 char* obtener_host(char* directorio);
 int conneccion(char* host);
 FILE* hacerrequest(int sockfd,char *url);
-void *leerlinea(FILE *fd);
+List *leerlinea(FILE *fd,List *lArch);
 
 
 #endif

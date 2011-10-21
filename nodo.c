@@ -9,10 +9,9 @@ Nodo* newNodo(char *nombre) {
     Nodo* n = (Nodo*) calloc(1, sizeof (Nodo));
     n->next = NULL;
     n->prev = NULL;
-  
     strcpy(n->nombre, nombre);
-      //printf("hola\n");
-    n->fecha = (struct tm*) calloc(1, sizeof (struct tm));
+    n->fecha;
+   // n->fecha = 
     n->tam = 0;
     return n;
 }
@@ -36,8 +35,8 @@ void* setNombre(Nodo* n, char *nombre) {
  * @return void*
  */
 
-void* setF(Nodo* n, struct tm* fecha) {
-    n->fecha = fecha;
+void* setF(Nodo* n, char* fecha) {
+    strcpy(n->fecha, fecha);
 
 }
 
@@ -80,13 +79,15 @@ void* setT(Nodo* n, int t) {
  *         2 en caso de que el nodo p es mas actual
  */
 int compare(Nodo* n, Nodo *p) {
-    double comp = compareF(n, p);
+    
+    int comp = compareF(n, p);
+    
     if (comp == 0) {
         if (n->tam == p->tam) {
             return 0;
         }
     }
-    if (comp < 0.0) {
+    if (comp < 0) {
         return 2; // nodo p es mas actual
     }
     return 1; // nodo n es mas actual
@@ -99,13 +100,11 @@ int compare(Nodo* n, Nodo *p) {
  * @param p Segundo nodo a comparar
  * @return  Devuelve un double de la resta de las fechas
  */
-double compareF(Nodo* n, Nodo* p) {
-    double salida;
-    time_t t1;
-    time_t t2;
-    t1 = mktime(n->fecha);
-    t2 = mktime(p->fecha);
-    salida = difftime(t1, t2);
+int compareF(Nodo* n, Nodo* p) {
+   
+   int salida = (strcmp (n->fecha,p->fecha));     
+    //printf("%s vs %s\n",n->fecha,p->fecha) ;
+    //printf ("%f\n",salida);
     return (salida);
 }
 

@@ -10,7 +10,7 @@ typedef struct nodo {
     struct nodo *next;
     struct nodo *prev;
     char nombre[FILENAME_MAX];
-    struct tm *fecha;
+    char fecha[FILENAME_MAX];
     int tam;
 } Nodo;
 
@@ -38,7 +38,7 @@ void* setNombre(Nodo* n, char *nombre);
  * @return void*
  */
 
-void* setF(Nodo* n, struct tm* fecha);
+void* setF(Nodo* n, char* fecha);
 /**
  * Funcion que coloca el siguiente en el nodo n
  * @param n apuntador al nodo
@@ -76,7 +76,7 @@ int compare(Nodo* n, Nodo *p);
  * @param p Segundo nodo a comparar
  * @return  Devuelve un double de la resta de las fechas
  */
-double compareF(Nodo* n, Nodo* p);
+int compareF(Nodo* n, Nodo* p);
 /**
  * Funcion que compara los nombres de dos nodos
  * @param n Primer nodo a comparar
